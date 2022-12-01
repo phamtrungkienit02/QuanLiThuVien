@@ -27,9 +27,11 @@ public class LoginController implements Initializable {
         String err1 = "Tên đăng nhập không được để trống hoặc có khoảng trắng";
         String err2 = "Mật khẩu không được để trống hoặc có khoảng trắng";
         String err3 = "Tên đăng nhập hay mật khẩu sai";
+        String err4 = "Mật khẩu tối đa 9 kí tự";
         
         DataValidator.validateEmpty(txtUser, err1, sb);
         DataValidator.passEmpty(txtPass, err2, sb);
+        DataValidator.checkLength(txtPass, err4, sb);
         //co thong bao
         if (sb.length() > 0){
             MessageLogin.showErrorLogin("ERROR", sb.toString());

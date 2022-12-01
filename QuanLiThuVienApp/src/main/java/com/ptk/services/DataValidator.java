@@ -35,5 +35,12 @@ public class DataValidator {
            field.requestFocus();
        }
     }
- 
+    public static void checkLength(PasswordField field, String errorMessage, StringBuilder sb){
+    //   String password = new String(field.getText());
+       if (field.getText().length() > 9){
+           //field.setBackground(Background b.Color.red);
+           sb.append(errorMessage).append("\n");
+           field.requestFocus();
+       }
+    }
 }
