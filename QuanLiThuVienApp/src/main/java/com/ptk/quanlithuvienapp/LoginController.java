@@ -4,8 +4,10 @@
  */
 package com.ptk.quanlithuvienapp;
 
+import com.ptk.pojo.User;
 import com.ptk.services.DataValidator;
 import com.ptk.services.MessageLogin;
+import com.ptk.services.UserDao;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,17 +26,33 @@ public class LoginController implements Initializable {
         StringBuilder sb = new StringBuilder();
         String err1 = "Tên đăng nhập không được để trống hoặc có khoảng trắng";
         String err2 = "Mật khẩu không được để trống hoặc có khoảng trắng";
-
+        String err3 = "Tên đăng nhập hay mật khẩu sai";
+        
         DataValidator.validateEmpty(txtUser, err1, sb);
         DataValidator.passEmpty(txtPass, err2, sb);
         //co thong bao
         if (sb.length() > 0){
-            MessageLogin.showErrorLogin("", sb.toString());
+            MessageLogin.showErrorLogin("ERROR", sb.toString());
             return;
         }
-        else App.setRoot("primary");
-        
-        
+        //else App.setRoot("primary");
+       
+        UserDao dao = new UserDao();
+        try {
+            User u1 = dao.checkLogin(txtUser.getText(), txtPass.getText());
+            if (u1 == null){
+                MessageLogin.showErrorLogin("ERROR", err3);
+            }
+            else{
+                //MessageLogin.showIndex("Đăng nhập thành công", "WELCOME TO LIBRARY MANAGER ");
+                App.setRoot("primary");
+            }
+                
+        } catch(Exception e){
+            e.printStackTrace();
+            MessageLogin.showErrorLogin("ERROR", e.getMessage());
+        }
+     
         
 //        if( txtUser.getText().contains(" ") ||  txtUser.getText().equals("")){
 ////            App.setRoot("secondary");

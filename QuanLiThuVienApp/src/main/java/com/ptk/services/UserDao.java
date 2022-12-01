@@ -16,21 +16,21 @@ import java.sql.ResultSet;
 public class UserDao {
 
   
-    public User checkLogin(String userName, String passWord) throws Exception{
-        String sql = "SELECT userName, passWord, active FROM user"
-                + "WHERE userName=? AND matKhau=?";
+    public User checkLogin(String username, String password) throws Exception{
+        String sql = "SELECT username, password, active FROM user"
+                + " WHERE username=? AND password=? ";
         try(
                 Connection conn = JdbcUtils.getConn();
                 PreparedStatement pstmt = conn.prepareStatement(sql);
            ){
-            pstmt.setString(1, userName);
-            pstmt.setString(2, userName);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
             // thuc hien cau truy van ben tren
             try(ResultSet rs = pstmt.executeQuery();){
                 //co thong tin
                 if (rs.next()) {
                     User u1 = new User();
-                    u1.setUserName(userName);
+                    u1.setUserName(username);
                     u1.setActive(rs.getString("active"));
                     //khong thiet lap mat khau de dam bao an toan
                     return u1;

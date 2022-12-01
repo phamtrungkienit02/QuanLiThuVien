@@ -14,21 +14,21 @@ import javafx.scene.control.Alert;
  * @author Kien
  */
 public class MessageLogin {
-    public static void showMessageLogin(String content, String title){
+    public static void showMessageLogin(String title, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setContentText(content);
         alert.setHeaderText("INFORMATION MESSAGE");
         alert.showAndWait();
     }
-    public static void showErrorLogin(String content, String title){
+    public static void showErrorLogin(String title, String content){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
         alert.setContentText(content);
         alert.setHeaderText("ERROR MESSAGE");
         alert.showAndWait();
     }
-    public static void showConfirmLogin(String content, String title){
+    public static void showIndex(String title, String content){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setContentText(content);
