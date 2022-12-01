@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--<?import com.gluonhq.charm.glisten.control.Icon?>-->
+
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ptk.quanlithuvienapp.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="553.0" prefWidth="751.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ptk.quanlithuvienapp.LoginController">
    <children>
-      <Button layoutX="100.0" layoutY="269.0" mnemonicParsing="false" onAction="#switchToLogin" text="Đăng nhập" />
-      <TextField fx:id="txtUser" layoutX="180.0" layoutY="78.0" />
-      <PasswordField fx:id="txtPass" layoutX="180.0" layoutY="169.0" />
+      <Button layoutX="488.0" layoutY="387.0" mnemonicParsing="false" onAction="#switchToLogin" prefHeight="52.0" prefWidth="110.0" styleClass="btnLogin" stylesheets="@../css/style.css" text="Login" />
+      <TextField id="login" fx:id="txtUser" layoutX="436.0" layoutY="129.0" prefHeight="34.0" prefWidth="221.0" promptText="User Name" styleClass="txtLogin" stylesheets="@../css/style.css" />
+      <PasswordField fx:id="txtPass" layoutX="436.0" layoutY="225.0" prefHeight="34.0" prefWidth="221.0" promptText="Password" styleClass="txtLogin" stylesheets="@../css/style.css" />
+<!--      <Icon id="icon" content="PERSON" layoutX="396.0" layoutY="127.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" />
+      <Icon id="icon" content="SECURITY" layoutX="396.0" layoutY="223.0" prefHeight="40.0" prefWidth="40.0" />-->
+      <Pane prefHeight="553.0" prefWidth="319.0" style="-fx-background-color: #0D4C92;">
+         <children>
+            <Label layoutX="22.0" layoutY="258.0" styleClass="txtHeader" text="Library Management" />
+            <ImageView fitHeight="163.0" fitWidth="197.0" layoutX="60.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/images.jpeg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="472.0" layoutY="43.0" styleClass="txtTitle" text="USER LOGIN" />
+      <!--<Icon content="HELP_OUTLINE" layoutX="357.0" layoutY="155.0" />-->
+      <ImageView fitHeight="52.0" fitWidth="59.0" layoutX="348.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="357.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="115.0">
+         <image>
+            <Image url="@../images/person.png" />
+         </image></ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="358.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/key.png" />
+         </image></ImageView>
+      <Label fx:id="lbError" layoutX="342.0" layoutY="277.0" prefHeight="102.0" prefWidth="381.0" stylesheets="@../css/style.css" />
    </children>
+   <cursor>
+<!--      <Cursor fx:constant="S_RESIZE" />-->
+   </cursor>
 </AnchorPane>

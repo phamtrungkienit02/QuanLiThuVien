@@ -1,0 +1,36 @@
+
+AnchorPane {
+    -fx-background-color: #CFF5E7;
+}
+Label {
+    -fx-font-size: 15px;
+}
+
+Label.txtHeader{
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+}
+
+Label.txtTitle{
+    -fx-font-size: 25px;
+    -fx-font-weight:bold;
+    -fx-text-fill: #0598ff;
+}
+
+.txtLogin, .btnLogin{
+    -fx-font-size: 20px;
+    -fx-font-weight:bold;
+    -fx-border-color: #0598ff;
+}
+.btn.Login {
+    -fx-background-color: #0598ff;
+    -fx-text-fill: white;
+}
+
+.txtLogin{
+    -fx-border-width: 0px 0px 3px 0px;
+}
+.btnLogin:hover {
+    -fx-font-size: 25px;
+    -fx-background-color: #43A047;
+}
