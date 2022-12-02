@@ -4,11 +4,18 @@
  */
 package com.ptk.quanlithuvienapp;
 
+import com.ptk.pojo.Book;
+import com.ptk.services.BookDao;
+import com.ptk.services.MessageLogin;
+import com.ptk.services.DataValidator;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.RadioButton;
+
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -16,11 +23,67 @@ import javafx.fxml.Initializable;
  * @author Kien
  */
 public class EditBookController implements Initializable {
-
+    @FXML private TextField txtBook;
+    @FXML private TextField txtYear;
+    @FXML private TextField txtSurname;
+    @FXML private TextField txtName;
+    @FXML private TextField txtNumber;
+    @FXML private TextField txtCategory;
+    @FXML private RadioButton rdbStatus;
    
-    @FXML
-    private void switchToPrimary() throws IOException {
+    
+    @FXML private void switchToPrimary() throws IOException {
         App.setRoot("primary");
+    }
+    
+    @FXML private void newBook() throws IOException {
+    txtBook.setText("");
+    txtYear.setText("");
+    txtSurname.setText("");
+    txtName.setText("");
+    txtNumber.setText("");
+    txtCategory.setText("");
+    }
+    
+    @FXML private void saveBook() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtBook, "Tên sách không được để trống", sb);
+        DataValidator.validateEmpty(txtYear, "Năm xuất bản không được để trống", sb);
+        DataValidator.validateEmpty(txtSurname, "Họ tác giả không được để trống", sb);
+        DataValidator.validateEmpty(txtName, "Tên tác giả không được để trống", sb);
+        DataValidator.validateEmpty(txtNumber, "Số lượng sách không được để trống", sb);
+        DataValidator.validateEmpty(txtCategory, "Thể loại sách không được để trống", sb);
+        
+        
+        if(sb.length() > 0){
+            MessageLogin.showErrorLogin("ERROR", sb.toString());
+            return;
+        }
+        //kiem tra viec nhap du lieu
+        try {
+            Book b = new Book();
+            b.setName(txtBook.getText());
+            b.setYear(Integer.valueOf(txtYear.getText()));
+            b.setSurname_author(txtSurname.getText());
+            b.setName_author(txtName.getText());
+            b.setNumber(Integer.valueOf(txtNumber.getText()));
+            b.setCategory(txtCategory.getText());
+            b.setStatus(rdbStatus.isSelected()?1:0);
+            
+            BookDao dao = new BookDao();
+            //True: co du lieu
+            if(dao.insertBook(b)) {
+                MessageLogin.showMessageLogin("Thông báo", "Sách đã được thêm thành công!!!");
+            }else {
+                MessageLogin.showErrorLogin("ERROR", "Sách không không được thêm do ");
+            }
+            
+                    
+        }catch (Exception e){
+            //in thong tin loiERROR
+            e.printStackTrace();
+            MessageLogin.showErrorLogin("", e.getMessage());
+        }
     }
     
     @Override
