@@ -1,28 +1,32 @@
 
-AnchorPane {
+.header {
+    -fx-background-color: #0D4C92;
+}
+.body{
     -fx-background-color: #CFF5E7;
+    
 }
 Label {
     -fx-font-size: 15px;
 }
 
-Label.txtHeader{
+Label.lbHeader{
     -fx-font-size: 30px;
     -fx-text-fill: white;
 }
 
-Label.txtTitle{
+Label.lbTitle{
     -fx-font-size: 25px;
     -fx-font-weight:bold;
     -fx-text-fill: #0598ff;
 }
 
-.txtLogin, .btnLogin{
+.txtLogin, .btnLogin, .btnBut{
     -fx-font-size: 20px;
     -fx-font-weight:bold;
     -fx-border-color: #0598ff;
 }
-.btn.Login {
+.btnLogin, .btnBut {
     -fx-background-color: #0598ff;
     -fx-text-fill: white;
 }
@@ -30,7 +34,7 @@ Label.txtTitle{
 .txtLogin{
     -fx-border-width: 0px 0px 3px 0px;
 }
-.btnLogin:hover {
-    -fx-font-size: 25px;
+.btnLogin:hover, .btnBut:hover {
+    -fx-font-size: 22px;
     -fx-background-color: #43A047;
 }

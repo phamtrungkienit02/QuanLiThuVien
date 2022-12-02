@@ -48,7 +48,8 @@ public class DataValidator {
         String u = field1.getText();
         String p = field2.getText();
         for(int i = 0; i < u.length(); i++){
-            if ((int)u.charAt(i) < 48 || ((int)u.charAt(i) > 57 && (int)u.charAt(i) < 65) ||
+            if (((int)u.charAt(i) < 48 && (int)u.charAt(i) > 32) || 
+                ((int)u.charAt(i) > 57 && (int)u.charAt(i) < 65) ||
                 ((int)u.charAt(i) > 90 && (int)u.charAt(i) < 97) ||
                   (int)u.charAt(i) > 123){
                 sb.append(errorMessage).append("\n");          
@@ -56,9 +57,10 @@ public class DataValidator {
             }
         }
         for(int i = 0; i < p.length(); i++){
-            if ((int)p.charAt(i) < 48 || ((int)p.charAt(i) > 57 && (int)p.charAt(i) < 65) ||
+            if (((int)p.charAt(i) < 48 && (int)p.charAt(i) > 32) || 
+                ((int)p.charAt(i) > 57 && (int)p.charAt(i) < 65) ||
                 ((int)p.charAt(i) > 90 && (int)p.charAt(i) < 97) ||
-                  (int)p.charAt(i) > 123){
+                 (int)p.charAt(i) > 123){
                 sb.append(errorMessage).append("\n");          
                 return;
             }

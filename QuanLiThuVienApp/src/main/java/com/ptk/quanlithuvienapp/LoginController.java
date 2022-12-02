@@ -26,12 +26,12 @@ public class LoginController implements Initializable {
     @FXML private Label lbError;
   
   
-    @FXML private void switchToLogin() throws IOException {
+    @FXML private void switchToPrimary() throws IOException {
         StringBuilder sb = new StringBuilder();
         String err1 = "username không được để trống hoặc có khoảng trắng";
-        String err2 = "password không được để trống hoặc có khoảng trắng";
-        String err3 = "username hay password sai";
-        String err4 = "password tối đa 9 kí tự";
+        String err2 = "Password không được để trống hoặc có khoảng trắng";
+        String err3 = "Username hay password sai";
+        String err4 = "Password tối đa 9 kí tự";
         String err5 = "Không nhập kí tự đặc biệt";
         
         DataValidator.validateEmpty(txtUser, err1, sb);
