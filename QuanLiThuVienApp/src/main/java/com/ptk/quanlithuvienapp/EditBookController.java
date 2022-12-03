@@ -4,14 +4,15 @@
  */
 package com.ptk.quanlithuvienapp;
 
-import com.ptk.pojo.Book;
 import com.ptk.services.BookDao;
 import com.ptk.services.MessageLogin;
 import com.ptk.services.DataValidator;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
@@ -19,7 +20,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
+import javafx.scene.control.cell.PropertyValueFactory;
+import org.w3c.dom.events.MouseEvent;
 
 /**
  * FXML Controller class
@@ -53,7 +55,7 @@ public class EditBookController implements Initializable {
     txtCategory.setText("");
     }
     
-    @FXML private void saveBook() throws IOException {
+    @FXML private void saveBook() throws IOException, Exception {
         StringBuilder sb = new StringBuilder();
         DataValidator.validateEmpty(txtBookId, "Mã sách không được để trống", sb);
        // DataValidator.validateEmpty(txtBook, "Tên sách không được để trống", sb);
@@ -83,6 +85,7 @@ public class EditBookController implements Initializable {
             //True: co du lieu
             if(dao.insertBook(b)) {
                 MessageLogin.showMessageLogin("Thông báo", "Sách đã được thêm thành công!!!");
+                showBooks();
             }else {
                 MessageLogin.showErrorLogin("ERROR", "Sách không không được thêm do lỗi");
             }
@@ -123,6 +126,7 @@ public class EditBookController implements Initializable {
             //True: co du lieu
             if(dao.updateBook(b)) {
                 MessageLogin.showMessageLogin("Thông báo", "Cập nhập sách thành công!!!");
+                showBooks();
             }else {
                 MessageLogin.showErrorLogin("ERROR", "Không cập nhập được thêm do lỗi");
             }
@@ -147,6 +151,7 @@ public class EditBookController implements Initializable {
             //True: co du lieu
             if(dao.deleteBook(txtBookId.getText())) {
                 MessageLogin.showMessageLogin("Thông báo", "Xóa sách thành công!!!");
+                showBooks();
             }else {
                 MessageLogin.showErrorLogin("ERROR", "Không Xóa được thêm do lỗi");
             }
@@ -166,26 +171,52 @@ public class EditBookController implements Initializable {
     @FXML private TableColumn<?, ?> colStatus;
     @FXML private TableColumn<?,?> colYear;
     
-    private void loadBook(){
-        try{
-            BookDao dao = new BookDao();
-            List<Book> list = dao.loadBook();
-            
-            for (Book b:list){
-                
-            }
-            
-        } catch(Exception e) {
-            e.printStackTrace();
-            MessageLogin.showErrorLogin("", e.getMessage());
-
-        }
+    
+    
+    public void showBooks() throws Exception  {
+        BookDao dao = new BookDao();
+        ObservableList<Book> list = dao.loadBook1();
+        
+        colId.setCellValueFactory(new PropertyValueFactory<>("book_id"));
+        colBook.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+        colSurname.setCellValueFactory(new PropertyValueFactory<>("surname_author"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name_author"));
+        colNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+        colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));      
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+      
+        tbvBook.setItems(list);
+//       // tbvBook.a
+//        
     }
-            
-            
+            //    // xu li nap thong tin len textField khi an vao tung hang
+    @FXML private void getItem(){
+        Integer index = tbvBook.getSelectionModel().getSelectedIndex();
+        if (index < 0){
+            return;
+        }
+       
+        txtBookId.setText(colId.getCellData(index).toString());
+        txtBook.setText(colBook.getCellData(index).toString());
+        txtYear.setText(colYear.getCellData(index).toString());
+        txtSurname.setText(colSurname.getCellData(index).toString());
+        txtName.setText(colName.getCellData(index).toString());
+        txtNumber.setText(colNumber.getCellData(index).toString());
+        txtCategory.setText(colCategory.getCellData(index).toString());
+       //
+       //outPut.setText(colName.getCellData(index).toString());
+        
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         try {
+              showBooks();
+          } catch (Exception ex) {
+              Logger.getLogger(EditBookController.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }    
     
 }
