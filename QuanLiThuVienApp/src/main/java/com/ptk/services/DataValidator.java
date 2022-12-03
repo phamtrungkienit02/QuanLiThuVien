@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
  * @author Kien
  */
 public class DataValidator {
-   public static void validateEmpty(TextField field, String errorMessage, StringBuilder sb){       
+   public static void validateEmptyAndSpace(TextField field, String errorMessage, StringBuilder sb){       
        if (field.getText().contains(" ") ||  field.getText().equals("")){
            //field.setBackground(Background b.Color.red);
            sb.append(errorMessage).append("\n");
@@ -35,16 +35,15 @@ public class DataValidator {
            field.requestFocus();
        }
     }
-    public static void checkLength(PasswordField field, String errorMessage, StringBuilder sb){
-    //   String password = new String(field.getText());
+   public static void checkLengthPass(PasswordField field, String errorMessage, StringBuilder sb){
+    //   String password = new String(field.getText(Pass));
        if (field.getText().length() > 9){
            //field.setBackground(Background b.Color.red);
            sb.append(errorMessage).append("\n");
            field.requestFocus();
        }
     }
-    
-    public static void checkSpecialChar(TextField field1,PasswordField field2, String errorMessage, StringBuilder sb){
+   public static void checkSpecialChar(TextField field1,PasswordField field2, String errorMessage, StringBuilder sb){
         String u = field1.getText();
         String p = field2.getText();
         for(int i = 0; i < u.length(); i++){
@@ -66,4 +65,13 @@ public class DataValidator {
             }
         }
     }
+   public static void validateEmpty(TextField field, String errorMessage, StringBuilder sb){       
+       if (field.getText().equals("")){
+           //field.setBackground(Background b.Color.red);
+           sb.append(errorMessage).append("\n");
+            // tro con tro chuot den vung loi
+           field.requestFocus();
+       }
+    } 
+
 }

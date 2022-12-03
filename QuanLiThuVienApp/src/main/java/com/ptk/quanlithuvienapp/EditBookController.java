@@ -57,29 +57,39 @@ public class EditBookController implements Initializable {
     
     @FXML private void saveBook() throws IOException, Exception {
         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtBookId, "Mã sách không được để trống", sb);
-       // DataValidator.validateEmpty(txtBook, "Tên sách không được để trống", sb);
-       // DataValidator.validateEmpty(txtYear, "Năm xuất bản không được để trống", sb);
-        //DataValidator.validateEmpty(txtSurname, "Họ tác giả không được để trống", sb);
-        DataValidator.validateEmpty(txtName, "Tên tác giả không được để trống", sb);
-        DataValidator.validateEmpty(txtNumber, "Số lượng sách không được để trống", sb);
-        //DataValidator.validateEmpty(txtCategory, "Thể loại sách không được để trống", sb);  
+        DataValidator.validateEmptyAndSpace(txtBookId, "Mã sách không được để trống", sb);
+        DataValidator.validateEmpty(txtBook, "Tên sách không được để trống", sb);
+        DataValidator.validateEmpty(txtYear, "Năm xuất bản không được để trống", sb);
+        DataValidator.validateEmpty(txtSurname, "Họ tác giả không được để trống", sb);
+        DataValidator.validateEmptyAndSpace(txtName, "Tên tác giả không được để trống", sb);
+        DataValidator.validateEmptyAndSpace(txtNumber, "Số lượng sách không được để trống", sb);
+        DataValidator.validateEmpty(txtCategory, "Thể loại sách không được để trống", sb);  
         
         if(sb.length() > 0){
             MessageLogin.showErrorLogin("ERROR", sb.toString());
             return;
         }
+        Book b = new Book();
+        if(rdbStatus1.isSelected() && rdbStatus2.isSelected()){
+            MessageLogin.showErrorLogin("ERROR", "Không được chọn 2 trường một lúc");
+        }
+        else if (rdbStatus1.isSelected()){
+           b.setStatus("Sách mới");
+        }
+            else  {
+            b.setStatus("Sách cũ");
+        }
+                        
+            
         //kiem tra viec nhap du lieu
         try {
-            Book b = new Book();
             b.setBook_id(txtBookId.getText());
             b.setName(txtBook.getText());
-            b.setYear(Integer.valueOf(txtYear.getText()));
+            b.setYear(Integer.parseInt(txtYear.getText()));
             b.setSurname_author(txtSurname.getText());
             b.setName_author(txtName.getText());
-            b.setNumber(Integer.valueOf(txtNumber.getText()));
+            b.setNumber(Integer.parseInt(txtNumber.getText()));
             b.setCategory(txtCategory.getText());
-            b.setStatus(rdbStatus1.isSelected()?"Sách mới":"Sách cũ");
             
             BookDao dao = new BookDao();
             //True: co du lieu
@@ -97,30 +107,41 @@ public class EditBookController implements Initializable {
     }
     
     @FXML private void updateBook() throws IOException {
-        StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtBookId, "Mã sách không được để trống", sb);
-        //DataValidator.validateEmpty(txtBook, "Tên sách không được để trống", sb);
-        //DataValidator.validateEmpty(txtYear, "Năm xuất bản không được để trống", sb);
-        //DataValidator.validateEmpty(txtSurname, "Họ tác giả không được để trống", sb);
-        DataValidator.validateEmpty(txtName, "Tên tác giả không được để trống", sb);
-        DataValidator.validateEmpty(txtNumber, "Số lượng sách không được để trống", sb);
-        //DataValidator.validateEmpty(txtCategory, "Thể loại sách không được để trống", sb);  
+       StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmptyAndSpace(txtBookId, "Mã sách không được để trống", sb);
+        DataValidator.validateEmpty(txtBook, "Tên sách không được để trống", sb);
+        DataValidator.validateEmpty(txtYear, "Năm xuất bản không được để trống", sb);
+        DataValidator.validateEmpty(txtSurname, "Họ tác giả không được để trống", sb);
+        DataValidator.validateEmptyAndSpace(txtName, "Tên tác giả không được để trống", sb);
+        DataValidator.validateEmptyAndSpace(txtNumber, "Số lượng sách không được để trống", sb);
+        DataValidator.validateEmpty(txtCategory, "Thể loại sách không được để trống", sb);  
         
         if(sb.length() > 0){
             MessageLogin.showErrorLogin("ERROR", sb.toString());
             return;
         }
+        Book b = new Book();
+        if(rdbStatus1.isSelected() && rdbStatus2.isSelected()){
+            MessageLogin.showErrorLogin("ERROR", "Không được chọn 2 trường một lúc");
+        }
+        else if (rdbStatus1.isSelected()){
+           b.setStatus("Sách mới");
+        }
+            else  {
+            b.setStatus("Sách cũ");
+        }
+                        
+            
         //kiem tra viec nhap du lieu
         try {
-            Book b = new Book();
             b.setBook_id(txtBookId.getText());
             b.setName(txtBook.getText());
-            b.setYear(Integer.valueOf(txtYear.getText()));
+            b.setYear(Integer.parseInt(txtYear.getText()));
             b.setSurname_author(txtSurname.getText());
             b.setName_author(txtName.getText());
-            b.setNumber(Integer.valueOf(txtNumber.getText()));
+            b.setNumber(Integer.parseInt(txtNumber.getText()));
             b.setCategory(txtCategory.getText());
-            b.setStatus(rdbStatus1.isSelected()?"Sách mới":"Sách cũ");
+            
             
             BookDao dao = new BookDao();
             //True: co du lieu
@@ -139,7 +160,7 @@ public class EditBookController implements Initializable {
     
     @FXML  private void deleteBook() throws IOException {
         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtBookId, "Mã sách không được để trống", sb);
+        DataValidator.validateEmptyAndSpace(txtBookId, "Mã sách không được để trống", sb);
         if(sb.length() > 0){
             MessageLogin.showErrorLogin("ERROR", sb.toString());
             return;
@@ -153,7 +174,7 @@ public class EditBookController implements Initializable {
                 MessageLogin.showMessageLogin("Thông báo", "Xóa sách thành công!!!");
                 showBooks();
             }else {
-                MessageLogin.showErrorLogin("ERROR", "Không Xóa được thêm do lỗi");
+                MessageLogin.showErrorLogin("ERROR", "Không Xóa được sách do lỗi");
             }
         }catch (Exception e){
             //in thong tin loiERROR
@@ -176,6 +197,7 @@ public class EditBookController implements Initializable {
     public void showBooks() throws Exception  {
         BookDao dao = new BookDao();
         ObservableList<Book> list = dao.loadBook1();
+        
         
         colId.setCellValueFactory(new PropertyValueFactory<>("book_id"));
         colBook.setCellValueFactory(new PropertyValueFactory<>("name"));

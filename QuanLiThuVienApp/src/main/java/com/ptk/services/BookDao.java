@@ -97,32 +97,38 @@ public class BookDao {
     
     
     public ObservableList<Book> loadBook1() throws Exception {
-        ObservableList<Book> list = FXCollections.observableArrayList();
-        Connection conn = JdbcUtils.getConn();
         String sql = "SELECT * FROM book";
-        Statement st= conn.createStatement();
-        try(ResultSet rs= st.executeQuery(sql);) {
-           
-            Book b = new Book();
-            while (rs.next()) {
-                b.setBook_id(rs.getString("book_id"));
-                b.setName(rs.getString("name"));
-                b.setYear(rs.getInt("year"));
-                b.setSurname_author(rs.getString("surname_author"));
-                b.setName_author(rs.getString("name_author"));
-                b.setNumber(rs.getInt("number"));
-                b.setCategory(rs.getString("category"));
-                b.setStatus(rs.getString("status"));
-                list.add(b);
-            }
+        try ( Connection conn = JdbcUtils.getConn();  
+                //Statement st = conn.createStatement();
+                PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-        } 
-        return list;
+            try ( ResultSet rs = pstmt.executeQuery(sql);) {
+                ObservableList<Book> list = FXCollections.observableArrayList();
+                //Book b = new Book();
+                while (rs.next()) {
+//                    b.setBook_id(rs.getString("book_id"));
+//                    b.setName(rs.getString("name"));
+//                    b.setYear(rs.getInt("year"));
+//                    b.setSurname_author(rs.getString("surname_author"));
+//                    b.setName_author(rs.getString("name_author"));
+//                    b.setNumber(rs.getInt("number"));
+//                    b.setCategory(rs.getString("category"));
+//                    b.setStatus(rs.getString("status"));
+//                    list.add(b);
+
+                    list.add(new Book(
+                            rs.getString("book_id"),
+                            rs.getString("name"),
+                            rs.getString("surname_author"),
+                            rs.getString("name_author"),
+                            rs.getString("category"),
+                            rs.getString("status"), rs.getInt("year"), rs.getInt("number")));
+                }
+                return list;
+            }
+        }
 
     }
-  
-
-            
 ////            while (rs.next()){
 ////                list.add(new Book(
 ////                rs.getString("book_id"),
