@@ -9,20 +9,29 @@ package com.ptk.pojo;
  * @author Kien
  */
 public class Book {
-    private String name, surname_author, name_author, category;
-    private int year, number, status;
+    private String book_id ,name, surname_author, name_author, category, status;
+    private int year, number;
 
     public Book() {
     }
 
-    public Book(String name, String surname_author, String name_author, int status, String category, int year, int number) {
+    public Book(String book_id, String name, String surname_author, String name_author, String category, String status, int year, int number) {
+        this.book_id = book_id;
         this.name = name;
         this.surname_author = surname_author;
         this.name_author = name_author;
-        this.status = status;
         this.category = category;
+        this.status = status;
         this.year = year;
         this.number = number;
+    }
+
+    public String getBook_id() {
+        return book_id;
+    }
+
+    public void setBook_id(String book_id) {
+        this.book_id = book_id;
     }
 
     public String getName() {
@@ -49,20 +58,20 @@ public class Book {
         this.name_author = name_author;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getYear() {
@@ -80,6 +89,7 @@ public class Book {
     public void setNumber(int number) {
         this.number = number;
     }
+
     
     
 }

@@ -5,6 +5,7 @@
 package com.ptk.services;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 
 
@@ -32,10 +33,10 @@ public class MessageLogin {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setContentText(content);
-        //alert.setHeaderText("INFORMATION MESSAGE");
+        alert.setHeaderText("INFORMATION MESSAGE");
 //        if(result.isPresent() && result.get() == ButtonType.OK){
-//            
-//        }
+//            return;
+//       }
         alert.showAndWait();
     }
 }
