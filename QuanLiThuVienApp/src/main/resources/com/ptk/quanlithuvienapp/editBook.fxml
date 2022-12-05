@@ -72,12 +72,12 @@
             <Button mnemonicParsing="false" onAction="#newBook" prefHeight="31.0" prefWidth="122.0" text="New" />
          </children>
       </GridPane>
-      <TableView layoutX="37.0" layoutY="478.0" prefHeight="200.0" prefWidth="1101.0">
+      <TableView fx:id="tbvBook" layoutX="37.0" layoutY="478.0" onMouseClicked="#getItem" prefHeight="200.0" prefWidth="1101.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="63.0" text="Mã sách" />
           <TableColumn fx:id="colBook" prefWidth="173.0" text="Tên sách" />
             <TableColumn fx:id="colYear" prefWidth="125.0" text="Năm xuất bản" />
-            <TableColumn fx:id="colSurname" prefWidth="161.0" text="Họ" />
+            <TableColumn fx:id="colSurname" prefWidth="161.0" text="Họ và tên lót" />
             <TableColumn fx:id="colName" prefWidth="130.0" text="Tên tác giả" />
             <TableColumn fx:id="colNumber" prefWidth="84.0" text="Số lượng" />
             <TableColumn fx:id="colCategory" prefWidth="140.0" text="Thể loại" />
