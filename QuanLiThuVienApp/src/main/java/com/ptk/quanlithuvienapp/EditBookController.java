@@ -60,9 +60,11 @@ public class EditBookController implements Initializable {
         DataValidator.validateEmptyAndSpace(txtBookId, "Mã sách không được để trống", sb);
         DataValidator.validateEmpty(txtBook, "Tên sách không được để trống", sb);
         DataValidator.validateEmpty(txtYear, "Năm xuất bản không được để trống", sb);
+        DataValidator.checkYearValid(txtYear, "Vui lòng nhập năm từ 1900 tới năm hiện ", sb);
         DataValidator.validateEmpty(txtSurname, "Họ tác giả không được để trống", sb);
         DataValidator.validateEmptyAndSpace(txtName, "Tên tác giả không được để trống", sb);
         DataValidator.validateEmptyAndSpace(txtNumber, "Số lượng sách không được để trống", sb);
+        DataValidator.checkNumber(txtNumber, "Vui lòng nhập sách từ 1 đến 50 cuốn", sb);
         DataValidator.validateEmpty(txtCategory, "Thể loại sách không được để trống", sb);  
         
         if(sb.length() > 0){
@@ -107,13 +109,15 @@ public class EditBookController implements Initializable {
     }
     
     @FXML private void updateBook() throws IOException {
-       StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         DataValidator.validateEmptyAndSpace(txtBookId, "Mã sách không được để trống", sb);
         DataValidator.validateEmpty(txtBook, "Tên sách không được để trống", sb);
         DataValidator.validateEmpty(txtYear, "Năm xuất bản không được để trống", sb);
+        DataValidator.checkYearValid(txtYear, "Năm không hợp lệ", sb);
         DataValidator.validateEmpty(txtSurname, "Họ tác giả không được để trống", sb);
         DataValidator.validateEmptyAndSpace(txtName, "Tên tác giả không được để trống", sb);
         DataValidator.validateEmptyAndSpace(txtNumber, "Số lượng sách không được để trống", sb);
+        DataValidator.checkNumber(txtNumber, "Số lượng sách không hợp lệ", sb);
         DataValidator.validateEmpty(txtCategory, "Thể loại sách không được để trống", sb);  
         
         if(sb.length() > 0){

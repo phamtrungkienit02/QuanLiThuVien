@@ -68,34 +68,7 @@ public class BookDao {
         }
 
     }
-
-    public List<Book> loadBook() throws Exception {
-        String sql = "SELECT * FROM book";
-        try (
-                 Connection conn = JdbcUtils.getConn();  PreparedStatement pstmt = conn.prepareStatement(sql);) {
-            try ( ResultSet rs = pstmt.executeQuery();) {
-                List<Book> list = new ArrayList<>();
-                while (rs.next()) {
-                    Book b = new Book();
-                   
-                    b.setBook_id(rs.getString("book_id"));
-                    b.setName(rs.getString("name"));
-                    b.setYear(rs.getInt("year"));
-                    b.setSurname_author(rs.getString("surname_author"));
-                    b.setName_author(rs.getString("name_author"));
-                    b.setNumber(rs.getInt("number"));
-                    b.setCategory(rs.getString("category"));
-                    b.setStatus(rs.getString("status"));
-                    list.add(b);
-                }
-                return list;
-            }
-
-        }
-    }
-    
-    
-    
+  
     public ObservableList<Book> loadBook1() throws Exception {
         String sql = "SELECT * FROM book";
         try ( Connection conn = JdbcUtils.getConn();  
@@ -122,23 +95,13 @@ public class BookDao {
                             rs.getString("surname_author"),
                             rs.getString("name_author"),
                             rs.getString("category"),
-                            rs.getString("status"), rs.getInt("year"), rs.getInt("number")));
+                            rs.getString("status"), 
+                            rs.getInt("year"), 
+                            rs.getInt("number")));
                 }
                 return list;
             }
         }
 
     }
-////            while (rs.next()){
-////                list.add(new Book(
-////                rs.getString("book_id"),
-////                rs.getString("name"),
-////                rs.getString("surname_author"),
-////                rs.getString("name_author"),
-////                rs.getString("category"), 
-////                rs.getString("status"), rs.getInt("year"), rs.getInt("number")));
-////                tbvBook.setItems(list);
-//
-    
-  
 }
