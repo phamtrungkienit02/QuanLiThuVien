@@ -36,7 +36,7 @@ public class LoginController implements Initializable {
         
         DataValidator.validateEmptyAndSpace(txtUser, err1, sb);
         DataValidator.passEmpty(txtPass, err2, sb);
-        DataValidator.checkLengthPass(txtPass, err4, sb);
+        DataValidator.checkLengthPass(txtPass, err4, sb, 9);
         DataValidator.checkSpecialChar(txtUser, txtPass, err5, sb);
         //co thong baoText
         if (sb.length() > 0){

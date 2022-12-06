@@ -5,6 +5,7 @@
 package com.ptk.services;
 
 
+import java.util.Calendar;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 //import javafx.scene.layout.Background;
@@ -35,9 +36,9 @@ public class DataValidator {
            field.requestFocus();
        }
     }
-   public static void checkLengthPass(PasswordField field, String errorMessage, StringBuilder sb){
+   public static void checkLengthPass(PasswordField field, String errorMessage, StringBuilder sb, int n){
     //   String password = new String(field.getText(Pass));
-       if (field.getText().length() > 9){
+       if (field.getText().length() > n){
            //field.setBackground(Background b.Color.red);
            sb.append(errorMessage).append("\n");
            field.requestFocus();
@@ -73,5 +74,18 @@ public class DataValidator {
            field.requestFocus();
        }
     } 
-
+    public static void checkYearValid(TextField field, String errorMessage, StringBuilder sb){
+       Calendar instance = Calendar.getInstance();
+       int year = instance.get(Calendar.YEAR);
+       if (field.getText().length() > 4 || Integer.parseInt(field.getText()) < 1900 || Integer.parseInt(field.getText()) > year){
+           sb.append(errorMessage).append("\n");
+           field.requestFocus();
+       }
+    }
+    public static void checkNumber(TextField field, String errorMessage, StringBuilder sb){
+        if (Integer.parseInt(field.getText()) < 1 || Integer.parseInt(field.getText()) > 50){
+           sb.append(errorMessage).append("\n");
+           field.requestFocus();
+       }
+    }
 }
