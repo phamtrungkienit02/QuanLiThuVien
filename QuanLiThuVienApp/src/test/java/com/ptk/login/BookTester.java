@@ -114,6 +114,8 @@ public class BookTester {
 //        try {
 //            ObservableList<Book> list = dao.loadBook1();
 //            Assertions.assertNotNull(list);   
+//            if(list.length() > 0)
+//                
 //        } catch (Exception ex) {
 //            Logger.getLogger(BookTester.class.getName()).log(Level.SEVERE, null, ex);
 //        }  
