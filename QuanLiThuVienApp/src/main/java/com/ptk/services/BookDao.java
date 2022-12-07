@@ -77,7 +77,7 @@ public class BookDao {
 
             try ( ResultSet rs = pstmt.executeQuery(sql);) {
                 ObservableList<Book> list = FXCollections.observableArrayList();
-                //Book b = new Book();
+//                Book b = new Book();
                 while (rs.next()) {
 //                    b.setBook_id(rs.getString("book_id"));
 //                    b.setName(rs.getString("name"));
