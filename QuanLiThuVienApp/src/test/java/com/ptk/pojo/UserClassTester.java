@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Kien
  */
-public class UserTester {
+public class UserClassTester {
     
-    public UserTester() {
+    public UserClassTester() {
     }
     
     @BeforeAll

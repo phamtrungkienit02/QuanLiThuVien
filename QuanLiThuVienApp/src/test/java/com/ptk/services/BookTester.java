@@ -1,13 +1,16 @@
-package com.ptk.login;
+package com.ptk.services;
 
 
 import com.ptk.quanlithuvienapp.Book;
+import com.ptk.quanlithuvienapp.Book;
 import com.ptk.services.BookDao;
+import com.ptk.services.JdbcUtils;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,10 +26,27 @@ import org.junit.jupiter.api.BeforeEach;
  * @author Kien
  */
 public class BookTester {
+    private static Connection conn;
     private static final BookDao dao = new BookDao();
     private static Book b1, b2;
     
+    @BeforeAll
+    public static void beforeAll() {
+        try {
+            conn = JdbcUtils.getConn();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookTester.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
+    @AfterAll
+    public static void afterAll() {
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BookTester.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
      //TEST HAM THEM SACH
     @Test
     public void testInsertBook() throws Exception{
@@ -108,17 +128,16 @@ public class BookTester {
         }  
     }
    
-    //TEST HÀM LOAD BOOK
-//    @Test
-//    public void testLoadBook() throws Exception{
-//        try {
-//            ObservableList<Book> list = dao.loadBook1();
-//            Assertions.assertNotNull(list);   
-//            if(list.length() > 0)
-//                
-//        } catch (Exception ex) {
-//            Logger.getLogger(BookTester.class.getName()).log(Level.SEVERE, null, ex);
-//        }  
-//    }
+   // TEST HÀM LOAD BOOK
+    @Test
+    public void testLoadBook() throws Exception{
+        try {
+            ObservableList<Book> list = dao.loadBook1();
+            Assertions.assertNotNull(list);   
+                
+        } catch (Exception ex) {
+            Logger.getLogger(BookTester.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
     
 }
