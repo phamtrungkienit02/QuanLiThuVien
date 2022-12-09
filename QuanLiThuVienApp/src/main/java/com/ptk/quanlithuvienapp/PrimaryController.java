@@ -25,4 +25,14 @@ public class PrimaryController {
   
         App.setRoot("editBook");
     }
+    
+    @FXML private void switchToSearchBook() throws IOException
+    {
+        App.setRoot("searchBook");
+    }
+    
+    @FXML private void switchToIssue_Return() throws IOException
+    {
+        App.setRoot("Issue_Return");
+    }
 }

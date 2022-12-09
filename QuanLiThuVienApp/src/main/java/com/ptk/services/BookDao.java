@@ -8,6 +8,10 @@ import com.ptk.quanlithuvienapp.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.sql.SQLException;
+
+
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,8 +104,40 @@ public class BookDao {
                             rs.getInt("number")));
                 }
                 return list;
+
+        }
+    }
+        
+         
+
+    public List<Book> getBook(String kw) throws SQLException {
+        List<Book> book = new ArrayList<>();
+
+        String sql = "SELECT * FROM book";
+        if (kw != null && !kw.isEmpty()) {
+            sql += " WHERE name like ?";
+        }
+
+        try ( Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            if (kw != null && !kw.isEmpty()) {
+                stm.setString(1, '%' + kw + '%');
             }
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Book b;
+                b = new Book(rs.getString("book_id"), rs.getString("name"),
+                        rs.getString("surname_author"), rs.getString("name_author"),
+                        rs.getString("category"), rs.getString("status"),
+                        rs.getShort("year"), rs.getShort("number"));
+                book.add(b);
+            }
+        }
+        return book;
+
         }
 
     }
+    
 }
