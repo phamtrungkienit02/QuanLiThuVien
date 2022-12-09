@@ -2,6 +2,9 @@ package com.ptk.services;
 
 
 import com.ptk.quanlithuvienapp.Book;
+
+import com.ptk.quanlithuvienapp.Book;
+
 import com.ptk.services.BookDao;
 import com.ptk.services.JdbcUtils;
 import java.sql.Connection;
@@ -128,7 +131,11 @@ public class BookTester {
     }
    
    // TEST HÀM LOAD BOOK
-    /*@Test
+
+
+
+    @Test
+
     public void testLoadBook() throws Exception{
         try {
             ObservableList<Book> list = dao.loadBook1();
@@ -138,5 +145,7 @@ public class BookTester {
             Logger.getLogger(BookTester.class.getName()).log(Level.SEVERE, null, ex);
         }  
     }
-    */
+
+    
+
 }

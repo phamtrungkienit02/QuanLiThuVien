@@ -5,6 +5,7 @@ module com.ptk.quanlithuvienapp {
     requires java.sql;
     requires javafx.base;
 
+
     opens com.ptk.quanlithuvienapp to javafx.fxml;
     exports com.ptk.quanlithuvienapp;
     exports com.ptk.pojo;
