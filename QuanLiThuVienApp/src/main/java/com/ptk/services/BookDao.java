@@ -107,7 +107,7 @@ public class BookDao {
 
         }
     }
-        
+    } 
          
 
     public List<Book> getBook(String kw) throws SQLException {
@@ -136,8 +136,8 @@ public class BookDao {
         }
         return book;
 
-        }
-
     }
+
+    
     
 }
