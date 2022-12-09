@@ -4,7 +4,6 @@
  */
 package com.ptk.quanlithuvienapp;
 
-import com.ptk.pojo.Book;
 import com.ptk.services.BookDao;
 import java.io.IOException;
 import java.net.URL;
@@ -85,9 +84,10 @@ public class SearchBookController implements Initializable {
         this.listbook.getColumns().addAll(colID, colName, colSurname, colAuthor, colCate, colStatus, colYear, colNum);
     }
     
-    private void LoadTableData (String kw) throws SQLException 
+    public void LoadTableData (String kw) throws SQLException 
     {
         BookDao b = new BookDao();
+        
         this.listbook.setItems(FXCollections.observableList(b.getBook(kw)));
     }
     

@@ -34,11 +34,11 @@ public class LoginController implements Initializable {
         String err4 = "Password tối đa 9 kí tự";
         String err5 = "Không nhập kí tự đặc biệt";
         
-        DataValidator.validateEmpty(txtUser, err1, sb);
+        DataValidator.validateEmptyAndSpace(txtUser, err1, sb);
         DataValidator.passEmpty(txtPass, err2, sb);
-        DataValidator.checkLength(txtPass, err4, sb);
+        DataValidator.checkLengthPass(txtPass, err4, sb, 9);
         DataValidator.checkSpecialChar(txtUser, txtPass, err5, sb);
-        //co thong bao
+        //co thong baoText
         if (sb.length() > 0){
             MessageLogin.showErrorLogin("ERROR", sb.toString());
             lbError.setTextFill(Color.RED);

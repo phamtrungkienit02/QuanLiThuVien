@@ -3,6 +3,7 @@ module com.ptk.quanlithuvienapp {
     requires javafx.fxml;
     requires java.base;
     requires java.sql;
+    requires javafx.base;
 
     opens com.ptk.quanlithuvienapp to javafx.fxml;
     exports com.ptk.quanlithuvienapp;

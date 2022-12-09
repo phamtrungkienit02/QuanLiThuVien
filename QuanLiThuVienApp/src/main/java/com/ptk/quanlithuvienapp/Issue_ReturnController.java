@@ -261,6 +261,7 @@ public class Issue_ReturnController implements Initializable {
             {
                 String rCardID = id;
                 String rStudentID = rs.getString("student_ID");
+                String rbookID = rs.getString("book_id");
                 Timestamp rBorrowTime = rs.getTimestamp("create_date");
                 
                 borrowData.add("Ngày mượn sách: " +rBorrowTime.toGMTString());
@@ -273,9 +274,10 @@ public class Issue_ReturnController implements Initializable {
                     borrowData.add("Ngày trả đã chọn: " + rs.getString(("end_date")));
                     borrowData.add("Số sách đã mượn: " + rs.getString("borrowBook_num")); 
                     borrowData.add("Status: " + rs.getString("borrow_status"));
+                    
                 }
                 
-                sql = "SELECT * FROM book WHERE book_id = '" + rBookID + "'";
+                sql = "SELECT * FROM book WHERE book_id = '" + rbookID + "'";
                 rs = stm.executeQuery(sql);
                 borrowData.add("==========Thông tin sách==========");
                 while(rs.next())

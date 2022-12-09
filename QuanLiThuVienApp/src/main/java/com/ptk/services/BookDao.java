@@ -1,16 +1,19 @@
-     /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.ptk.services;
 
-import com.ptk.pojo.Book;
+import com.ptk.quanlithuvienapp.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -19,7 +22,7 @@ import java.util.List;
 public class BookDao {
 
     public boolean insertBook(Book b) throws Exception {
-        String sql = "INSERT INTO book(book_id, name, year, surname_author, name_author, number, category, status"
+        String sql = "INSERT INTO book(book_id, name, year, surname_author, name_author, number, category, status)"
                 + " values(?,?,?,?,?,?,?,?)";
         try (
                  Connection conn = JdbcUtils.getConn();  PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -66,57 +69,69 @@ public class BookDao {
         }
 
     }
-
-    public List<Book> loadBook() throws Exception {
+  
+    public ObservableList<Book> loadBook1() throws Exception {
         String sql = "SELECT * FROM book";
-        try (
-                 Connection conn = JdbcUtils.getConn();  PreparedStatement pstmt = conn.prepareStatement(sql);) {
-            try ( ResultSet rs = pstmt.executeQuery();) {
-                List<Book> list = new ArrayList<>();
+        try ( Connection conn = JdbcUtils.getConn();  
+                //Statement st = conn.createStatement();
+                PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            try ( ResultSet rs = pstmt.executeQuery(sql);) {
+                ObservableList<Book> list = FXCollections.observableArrayList();
+//                Book b = new Book();
                 while (rs.next()) {
-                    Book b = new Book();
-                   
-                    b.setBook_id(rs.getString("book_id"));
-                    b.setName(rs.getString("name"));
-                    b.setYear(rs.getInt("year"));
-                    b.setSurname_author(rs.getString("surname_author"));
-                    b.setName_author(rs.getString("name_author"));
-                    b.setNumber(rs.getInt("number"));
-                    b.setCategory(rs.getString("category"));
-                    b.setStatus(rs.getString("status"));
-                    list.add(b);
+//                    b.setBook_id(rs.getString("book_id"));
+//                    b.setName(rs.getString("name"));
+//                    b.setYear(rs.getInt("year"));
+//                    b.setSurname_author(rs.getString("surname_author"));
+//                    b.setName_author(rs.getString("name_author"));
+//                    b.setNumber(rs.getInt("number"));
+//                    b.setCategory(rs.getString("category"));
+//                    b.setStatus(rs.getString("status"));
+//                    list.add(b);
+
+                    list.add(new Book(
+                            rs.getString("book_id"),
+                            rs.getString("name"),
+                            rs.getString("surname_author"),
+                            rs.getString("name_author"),
+                            rs.getString("category"),
+                            rs.getString("status"), 
+                            rs.getInt("year"), 
+                            rs.getInt("number")));
                 }
                 return list;
             }
         }
     }
-    
-    public List<Book> getBook(String kw) throws SQLException
-    {
+        
+         
+
+    public List<Book> getBook(String kw) throws SQLException {
         List<Book> book = new ArrayList<>();
-        
-        
+
         String sql = "SELECT * FROM book";
-        if (kw != null && !kw.isEmpty())
+        if (kw != null && !kw.isEmpty()) {
             sql += " WHERE name like ?";
-        
-        try (Connection conn = JdbcUtils.getConn())
-        {
+        }
+
+        try ( Connection conn = JdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareStatement(sql);
-            if (kw != null && !kw.isEmpty())
-                stm.setString(1,'%' + kw + '%' );
-            
+            if (kw != null && !kw.isEmpty()) {
+                stm.setString(1, '%' + kw + '%');
+            }
+
             ResultSet rs = stm.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 Book b;
-                b = new Book(rs.getString("book_id"), rs.getString("name"), 
+                b = new Book(rs.getString("book_id"), rs.getString("name"),
                         rs.getString("surname_author"), rs.getString("name_author"),
-                        rs.getString("category"), rs.getString("status"), 
+                        rs.getString("category"), rs.getString("status"),
                         rs.getShort("year"), rs.getShort("number"));
                 book.add(b);
             }
         }
         return book;
     }
+    
 }
