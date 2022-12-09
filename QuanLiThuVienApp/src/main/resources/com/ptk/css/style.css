@@ -3,8 +3,12 @@
     -fx-background-color: #0D4C92;
 }
 .body{
-    -fx-background-color: #CFF5E7;
-    
+    -fx-background-color: #CFF5E7; 
+}
+.body_tab{
+    -fx-background-color: #bafbff;
+    -fx-border-color:#59e1ff;
+    -fx-border-width: 0px 3px 3px 0px;
 }
 Label {
     -fx-font-size: 15px;
